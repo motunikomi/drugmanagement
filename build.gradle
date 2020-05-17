@@ -2,15 +2,21 @@ plugins {
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'jacoco'
+	id 'checkstyle'
+	id 'war'
+	id "com.github.spotbugs" version "3.0.0"
+	id 'pmd'
 }
 
 group = 'com.drug'
-version = '0.0.1-SNAPSHOT'
+//version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
 	}
 }
 
@@ -21,13 +27,57 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
-
+tasks.withType(AbstractCompile).each { it.options.encoding = 'UTF-8' }
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+}
 test {
 	useJUnitPlatform()
 }
+test.finalizedBy jacocoTestReport
+def coverageExcludeFiles = [
+        // 内部クラスやLambda匿名クラスを排除
+        '**/*$*.class',
+        '**/*$lambda$*.class',
+]
+checkstyle {
+    ignoreFailures = true
+    toolVersion '8.30'
+	configFile = file('src/main/resources/google_checks.xml')
+}
+pmd {
+  ignoreFailures = true
+  ruleSets = [
+    'java-basic',
+    'java-braces',
+  ]
+}
+spotbugs {
+  ignoreFailures = true
+  reportsDir file("./build/reports/spotbugs")
+}
+jacocoTestReport {
+    reports {
+        html.enabled = true
+        xml.enabled false
+    	csv.enabled false
+    	html.destination file("./build/reports/jacoco")
+    }
+    afterEvaluate {
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(
+                    dir: it,
+                    exclude: coverageExcludeFiles)
+        })
+    }
+}
+
