@@ -1,3 +1,11 @@
+CREATE TABLE IF NOT EXISTS item (
+  id int(20) NOT NULL AUTO_INCREMENT,
+  name varchar(255),
+  price real,
+  vendor varchar(255),
+  PRIMARY KEY (id)
+);
+
 /*CREATE TABLE IF NOT EXISTS item (
   id 				int(20) 	PRIMARY KEY AUTO_INCREMENT,
   basket_no 		varchar(64),
@@ -16,7 +24,6 @@ CREATE TABLE IF NOT EXISTS rack_chemical (
   remaining_amount int(20),
   status varchar(64),
 );
-*/
 CREATE TABLE IF NOT EXISTS chemical (
   name varchar(64) PRIMARY KEY,
   chemical_id int(20),
@@ -25,3 +32,5 @@ CREATE TABLE IF NOT EXISTS chemical (
   remaining_amount int(20),
   status varchar(64),
 );
+
+*/
