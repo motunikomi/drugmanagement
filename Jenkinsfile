@@ -23,7 +23,7 @@ pipeline {
       post {
       	success {
           junit resultPath
-          jacoco execPattern: "${jacocoReportDir}/*.exec", exclusionPattern: '**/*Test.class'
+          jacoco execPattern: "${jacocoReportDir}/*.exec"
           recordIssues tool: checkStyle(pattern: checkstyleReport)
           recordIssues tool: pmdParser(pattern: pmdReport)
           recordIssues tool: spotBugs(pattern: spotbugsReport)

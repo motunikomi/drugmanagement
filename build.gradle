@@ -23,11 +23,6 @@ configurations {
 repositories {
 	mavenCentral()
 }
-tasks.withType(AbstractCompile).each { it.options.encoding = 'UTF-8' }
-tasks.withType(Test) {
-    systemProperty "file.encoding", "UTF-8"
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -50,6 +45,10 @@ def coverageExcludeFiles = [
         '**/*$*.class',
         '**/*$lambda$*.class',
 ]
+tasks.withType(AbstractCompile).each { it.options.encoding = 'UTF-8' }
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+}
 checkstyle {
     ignoreFailures = true
     toolVersion '8.30'
@@ -69,7 +68,7 @@ spotbugs {
 jacocoTestReport {
     reports {
         html.enabled = true
-        xml.enabled false
+        xml.enabled = true
     	csv.enabled false
     	html.destination file("./build/reports/jacoco")
     }
