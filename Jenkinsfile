@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh '''chmod +x ./gradlew
-		./gradlew clean assemble'''
+        sh 'chmod +x ./gradlew'
+        sh './gradlew clean assemble'
       }
     }
 
@@ -23,7 +23,7 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('error') {
       steps {
         cleanWs(cleanWhenFailure: true)
       }
