@@ -20,14 +20,14 @@ pipeline {
       steps {
         sh './gradlew test'
       }
-    }
-  	post {
-      success {
-        junit resultPath
-        jacoco execPattern: "${jacocoReportDir}/*.exec", exclusionPattern: '**/*Test.class'
-        recordIssues tool: checkStyle(pattern: checkstyleReport)
-        recordIssues tool: pmdParser(pattern: pmdReport)
-        recordIssues tool: spotBugs(pattern: spotbugsReport)
+      post {
+      	success {
+          junit resultPath
+          jacoco execPattern: "${jacocoReportDir}/*.exec", exclusionPattern: '**/*Test.class'
+          recordIssues tool: checkStyle(pattern: checkstyleReport)
+          recordIssues tool: pmdParser(pattern: pmdReport)
+          recordIssues tool: spotBugs(pattern: spotbugsReport)
+      	}
       }
     }
   }
