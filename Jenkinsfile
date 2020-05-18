@@ -34,7 +34,7 @@ pipeline {
     resultPath = 'build/test-results/**/TEST-*.xml'
     jacocoReportDir = 'build/jacoco'
     checkstyleReport = 'build/reports/checkstyle/*.xml'
-    pmdReport = 'build/reports/*.xml'
+    pmdReport = 'build/reports/pmd/*.xml'
     spotbugsReport = 'build/reports/spotbugs/*.xml'
   }
 }
