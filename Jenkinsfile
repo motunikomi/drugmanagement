@@ -31,10 +31,10 @@ pipeline {
 
   }
   environment {
-    resultPath = './build/test-results/**/TEST-*.xml'
-    jacocoReportDir = './build/jacoco'
-    checkstyleReport = './build/reports/checkstyle/*.xml'
-    pmdReport = './build/reports/*.xml'
-    spotbugsReport = './build/reports/spotbugs/*.xml'
+    resultPath = 'build/test-results/**/TEST-*.xml'
+    jacocoReportDir = 'build/jacoco'
+    checkstyleReport = 'build/reports/checkstyle/*.xml'
+    pmdReport = 'build/reports/*.xml'
+    spotbugsReport = 'build/reports/spotbugs/*.xml'
   }
 }
