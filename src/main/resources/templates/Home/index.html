@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+  <title>メインメニュー</title>
+</head>
+
+  <div class="container">
+    <div class="navbar-header">
+       <a class="navbar-brand"></a>
+    </div>
+    <div class="card card-primary mb-3">
+        <div class="card-header">
+          <h5 class="card-title">メインページ</h5>
+        </div>
+        <table class="table table-striped">
+          <tbody>
+            <td>管理画面</td>
+            <td class="float-right">
+              <a class="btn btn-primary" th:href="@{/items}">詳細</a>
+            </td>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  <script src="/js/jquery-3.4.1.min"></script>
+  <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
