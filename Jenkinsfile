@@ -26,7 +26,8 @@ pipeline {
     stage('error') {
       steps {
         withSonarQubeEnv('SonarQube') {
-          sh './gradlew sonarqube'
+          sh '''./gradlew sonarqube \\
+  -Dsonar.host.url=http://153.127.20.106:4902 \\'''
         }
 
         cleanWs(cleanWhenFailure: true)
