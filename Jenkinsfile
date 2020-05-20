@@ -27,9 +27,10 @@ pipeline {
 
         stage('sonar') {
           steps {
-              withSonarQubeEnv('SonarQube') {
-                sh './gradlew -Dsonar.host.url=http：//153.127.20.106：4902 sonarqube'
-              }
+            withSonarQubeEnv('SonarQube') {
+              sh './gradlew sonarqube'
+            }
+
           }
         }
 
