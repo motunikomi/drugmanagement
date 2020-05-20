@@ -9,36 +9,26 @@ pipeline {
     }
 
     stage('test') {
-      parallel {
-        stage('test') {
-          post {
-            success {
-              junit resultPath
-              recordIssues(tool: checkStyle(pattern: checkstyleReport))
-              recordIssues(tool: pmdParser(pattern: pmdReport))
-              recordIssues(tool: spotBugs(pattern: spotbugsReport))
-            }
-
-          }
-          steps {
-            sh './gradlew build check'
-          }
+      post {
+        success {
+          junit resultPath
+          recordIssues(tool: checkStyle(pattern: checkstyleReport))
+          recordIssues(tool: pmdParser(pattern: pmdReport))
+          recordIssues(tool: spotBugs(pattern: spotbugsReport))
         }
 
-        stage('sonar') {
-          steps {
-            withSonarQubeEnv('SonarQube') {
-              sh './gradlew sonarqube'
-            }
-
-          }
-        }
-
+      }
+      steps {
+        sh './gradlew build check'
       }
     }
 
     stage('error') {
       steps {
+        withSonarQubeEnv('SonarQube') {
+          sh './gradlew sonarqube'
+        }
+
         cleanWs(cleanWhenFailure: true)
       }
     }
