@@ -27,10 +27,7 @@ pipeline {
 
         stage('sonar') {
           steps {
-            sh '''./gradlew sonarqube \\
-  -Dsonar.projectKey=testpage \\
-  -Dsonar.host.url=http://153.127.20.106:4902 \\
-  -Dsonar.login=8e949d8c952f2a43763e9355a194a5ecf53082ed'''
+            sh './gradlew sonarqube '
           }
         }
 
