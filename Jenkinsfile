@@ -27,7 +27,9 @@ pipeline {
       steps {
         withSonarQubeEnv('SonarQube') {
           sh '''./gradlew sonarqube \\
-  -Dsonar.host.url=http://153.127.20.106:4902 \\'''
+  -Dsonar.projectKey=drugmanagement \\
+  -Dsonar.host.url=http://153.127.20.106:4902 \\
+  -Dsonar.login=6ed48d56ac6851c52d08728964d74a411e57a323'''
         }
 
         cleanWs(cleanWhenFailure: true)
