@@ -81,3 +81,11 @@ jacocoTestReport {
         })
     }
 }
+sonarqube {
+    properties {
+        property "sonar.host.url", "http://153.127.20.106:4902/"
+        property "sonar.projectKey", "drug"
+        property "sonar.login", "ceaf1092777813f42a912237200f78410e698f3f"
+
+    }
+}
